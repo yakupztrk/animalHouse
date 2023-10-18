@@ -188,21 +188,21 @@ section{
    display: none;
 }
 
-.home{
+.index{
    background:url('../images/homeBackground.jpg') no-repeat;
    background-size: cover;
    background-position: left;
    min-height: 60vh;
 }
 
-.home .center{
+.index .center{
 
    display: flex;
    align-items: center;
    justify-content: center;
 }
 
-.home .center form{
+.index .center form{
    background-color: var(--white);
    padding: 2rem;
    box-shadow: var(--box-shodow);
@@ -1054,7 +1054,7 @@ section{
       font-size: 1.8rem;
    }
 
-   .home .center form .flex{
+   .index .center form .flex{
       gap: 0;
    }
 
