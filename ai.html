@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>AI</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+   <link rel="stylesheet" href="css/style.css">
+   <!-- Service Box css file link  -->
+   <link rel="stylesheet" href="css/serviceBox.css">
+</head>
+
+<body>
+   
+   <!-- header section starts  -->
+   <header class="header">
+
+      <nav class="navbar nav-1">
+         <section class="flex">
+            <a href="home.html" class="logo"><i class="fa-solid fa-cat"></i>Animal House</a>
+
+            <ul>
+                  <li><a href="contact.html">Contact<i class="fas fa-paper-plane"></i></a></li>
+            </ul>
+         </section>
+      </nav>
+
+      <nav class="navbar nav-2">
+         <section class="flex">
+            <div id="menu-btn" class="fas fa-bars"></div>
+            <div class="menu">
+                  <ul>
+                     <li><a href="ai.html">Artificial Intelligence<i class="fa-solid fa-robot"></i></a></li>
+                     <li><a href="info.html">Things to Know</a></li>
+                     <li>
+                        <a>Cat<i class="fas fa-angle-down"></i></a>
+                        <ul>
+                              <li><a href="alvin.html">Alvin</a></li>
+                              <li><a href="cotton.html">Cotton</a></li>
+                              <li><a href="nugget.html">Nugget</a></li>
+                              <li><a href="iris.html">Iris</a></li>
+                              <li><a href="tulip.html">Tulip</a></li>
+                        </ul>
+                     </li>
+                     <li>
+                        <a href="#">Dog<i class="fas fa-angle-down"></i></a>
+                        <ul>
+                              <li><a href="rocky.html">Rocky</a></li>
+                              <li><a href="luna.html">Luna</a></li>
+                              <li><a href="bella.html">Bella</a></li>
+                              <li><a href="john.html">John</a></li>
+                              <li><a href="charlie.html">Charlie</a></li>
+                        </ul>
+                     </li>
+                  </ul>
+            </div>
+         </section>
+      </nav>
+
+   </header>
+   <!-- header section ends -->
+  <section class="ai">
+    <div class="details">
+        <h1 class="title">Detect Animal</h1>
+        <div class="image"> <img  id="imagePreview" style="height: 300px;"></div>
+        <input id="imageUpload" type="file">
+          
+        <div class="prediction">
+            <div id="label-container"></div>
+            <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
+            <script type="text/javascript">
+                // More API functions here:
+                // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
+      
+                // the link to your model provided by Teachable Machine export panel
+                const URL = "https://teachablemachine.withgoogle.com/models/f7wY-pjtfk/";
+      
+                let model, webcam, labelContainer, maxPredictions;
+      
+                // Load the image model and setup the webcam
+                async function init() {
+                  const modelURL = URL + "model.json";
+                  const metadataURL = URL + "metadata.json";
+      
+                  // load the model and metadata
+                  model = await tmImage.load(modelURL, metadataURL);
+                  maxPredictions = model.getTotalClasses();
+      
+                  // Convenience function to setup a webcam
+      
+                  labelContainer = document.getElementById("label-container");
+                  for (let i = 0; i < maxPredictions; i++) { // and class labels
+                      labelContainer.appendChild(document.createElement("div"));
+                  }
+                }
+      
+                // run the webcam image through the image model
+                async function predict() {
+                  // predict can take in an image, video or canvas html element
+                  var image = document.getElementById('imagePreview');
+                  const prediction = await model.predict(image, false);
+                  for (let i = 0; i < maxPredictions; i++) {
+                      const classPrediction =
+                        prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+                      labelContainer.childNodes[i].innerHTML = classPrediction;
+                  }
+                }
+              </script>
+        </div>
+          <!-- Teachable Machine Image Model with upload  -->
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+          <script type="text/javascript">
+          function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                      $('#imagePreview').attr('src', e.target.result);
+                      // $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+                      $('#imagePreview').hide();
+                      $('#imagePreview').fadeIn(650);
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                    init().then(() => {
+    
+                      predict();
+                    });
+                }
+              }
+              $('#imageUpload').change(function () {
+                readURL(this);
+              });
+          </script>
+          <h1 class="info">Info</h1>
+          <p class="p">The name with the highest value has the highest probability.</p>
+      
+    </div>
+
+  </section>
+<!-- JS File  -->
+<script src="js/script.js"></script>
+
+</body>
+</html>
