@@ -7,7 +7,6 @@
     outline: none; border:none;
     text-decoration: none;
     text-transform: capitalize;
-    
 }
 
 .container{
@@ -24,14 +23,12 @@
     color:#000000;
     text-shadow: 0 5px 10px rgba(0,0,0,.2);
     font-size: 50px;
-    
 }
 
 .container .box-container{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
     gap:15px;
-    
 }
 
 .container .box-container .box{
@@ -46,18 +43,6 @@
 .container .box-container .box img{
     height: 300px;
     border-radius: 12px;
-}
-
-.container .box-container .box h3{
-    color:#444;
-    font-size: 22px;
-    padding:10px 0;
-}
-
-.container .box-container .box p{
-    color:#777;
-    font-size: 15px;
-    line-height: 1.8;
 }
 
 .container .box-container .box .btn{
